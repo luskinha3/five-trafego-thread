@@ -54,7 +54,7 @@ public class Car {
 	public void draw(Graphics g) {
 		g.setColor(getColor());
 		g.drawRect(getX(), getY(), 30, 30);
-		if (combustivel < 0) {
+		if (combustivel <= 0) {
 			g.drawString("X", getX(), getY() + 10);
 			//
 			System.out.println("Necessário abastecer o veiculo");

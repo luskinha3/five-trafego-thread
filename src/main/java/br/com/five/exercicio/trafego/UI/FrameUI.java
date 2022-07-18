@@ -17,8 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
-import br.com.five.exercicio.trafego.comandos.ComandoMover;
 import br.com.five.exercicio.trafego.modelo.Car;
+import br.com.five.exercicio.trafego.modelo.comandos.ComandoMover;
 
 public class FrameUI extends JFrame {
 
@@ -56,7 +56,7 @@ public class FrameUI extends JFrame {
 		private AtomicBoolean estaLigado;
 
 		Panel2() throws InterruptedException {
-			setPreferredSize(new Dimension(800, 600));
+			setPreferredSize(new Dimension(850, 650));
 			this.threadPool = Executors.newCachedThreadPool();
 			this.estaLigado = new AtomicBoolean(true);
 			iniciarCarros();
@@ -84,7 +84,6 @@ public class FrameUI extends JFrame {
 		}
 
 		private void teste() throws InterruptedException {
-			// TODO : Me ajude ! Meus carros não estão desenhando!!!
 			
 			this.threadPool.execute(new Runnable() {
 				public void run() {	
@@ -93,7 +92,6 @@ public class FrameUI extends JFrame {
 						try {
 							Thread.sleep(1000);
 						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}						

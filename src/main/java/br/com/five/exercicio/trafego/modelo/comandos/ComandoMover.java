@@ -1,4 +1,4 @@
-package br.com.five.exercicio.trafego.comandos;
+package br.com.five.exercicio.trafego.modelo.comandos;
 
 import br.com.five.exercicio.trafego.modelo.Car;
 
@@ -15,7 +15,6 @@ public class ComandoMover implements Runnable{
 		while (carro.getCombustivel() > 0) {
 			
 			carro.mover();
-			System.out.println(carro.getCombustivel());
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
