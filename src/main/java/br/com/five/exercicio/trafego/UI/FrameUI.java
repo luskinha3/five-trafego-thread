@@ -20,6 +20,7 @@ import javax.swing.border.BevelBorder;
 import br.com.five.exercicio.trafego.modelo.Car;
 import br.com.five.exercicio.trafego.modelo.comandos.CaminhaoAbastecimento;
 import br.com.five.exercicio.trafego.modelo.comandos.ComandoMover;
+import br.com.five.exercicio.trafego.modelo.comandos.FabricaCombustivel;
 
 public class FrameUI extends JFrame {
 
@@ -54,14 +55,12 @@ public class FrameUI extends JFrame {
 	class Panel2 extends JPanel {
 		private BlockingQueue<Car> carros;
 		private ExecutorService threadPool;
-		private AtomicBoolean estaLigado;
 
 		Panel2() throws InterruptedException {
 			setPreferredSize(new Dimension(850, 650));
 			this.threadPool = Executors.newCachedThreadPool();
-			this.estaLigado = new AtomicBoolean(true);
 			iniciarCarros();
-			teste();
+			iniciarTrefego();
 		}
 
 		private Color defineColor() {
@@ -76,7 +75,7 @@ public class FrameUI extends JFrame {
 			Random rand = new Random();
 			// Cria 10 novos carros
 			carros = new ArrayBlockingQueue<Car>(10);
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 10; i++) {
 				Car c = new Car(rand.nextInt(800), rand.nextInt(600), rand.nextInt(50), defineColor());
 				c.mover();
 				c.setId(i);
@@ -85,7 +84,7 @@ public class FrameUI extends JFrame {
 
 		}
 
-		private void teste() throws InterruptedException {
+		private void iniciarTrefego() throws InterruptedException {
 			
 			this.threadPool.execute(new Runnable() {
 				public void run() {	
@@ -99,6 +98,7 @@ public class FrameUI extends JFrame {
 					}						
 				}});
 			CaminhaoAbastecimento caminhaoPosto = new CaminhaoAbastecimento();
+			this.threadPool.execute(new FabricaCombustivel(caminhaoPosto));
 			this.carros.forEach(c -> this.threadPool.execute(new ComandoMover(c, caminhaoPosto)));
 			
 			

@@ -44,7 +44,7 @@ public class Car {
 	}
 
 	public void mover() {
-		if (combustivel > 0) {
+		if (combustivel >= 0) {
 			Random rand = new Random();
 			int sortx = rand.nextInt(30) - 10;
 			x += sortx;
