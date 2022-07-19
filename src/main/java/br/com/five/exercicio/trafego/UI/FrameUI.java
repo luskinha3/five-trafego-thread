@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
 import br.com.five.exercicio.trafego.modelo.Car;
+import br.com.five.exercicio.trafego.modelo.comandos.CaminhaoAbastecimento;
 import br.com.five.exercicio.trafego.modelo.comandos.ComandoMover;
 
 public class FrameUI extends JFrame {
@@ -75,9 +76,10 @@ public class FrameUI extends JFrame {
 			Random rand = new Random();
 			// Cria 10 novos carros
 			carros = new ArrayBlockingQueue<Car>(10);
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 5; i++) {
 				Car c = new Car(rand.nextInt(800), rand.nextInt(600), rand.nextInt(50), defineColor());
 				c.mover();
+				c.setId(i);
 				carros.put(c);
 			}
 
@@ -96,8 +98,8 @@ public class FrameUI extends JFrame {
 						}
 					}						
 				}});
-			
-			this.carros.forEach(c -> this.threadPool.execute(new ComandoMover(c)));
+			CaminhaoAbastecimento caminhaoPosto = new CaminhaoAbastecimento();
+			this.carros.forEach(c -> this.threadPool.execute(new ComandoMover(c, caminhaoPosto)));
 			
 			
 		}

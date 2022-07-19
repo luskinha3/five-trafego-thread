@@ -10,12 +10,21 @@ public class Car {
 	private int y;
 	private Color color;
 	private int combustivel;
+	private int id;
 
 	public Car(int x, int y, int combustivel, Color color) {
 		this.x = x;
 		this.y = y;
 		this.combustivel = combustivel;
 		this.color = color;
+	}
+	
+	public void abastecer(int qtdCombustivel) {
+		this.combustivel = qtdCombustivel;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getX() {
@@ -57,7 +66,11 @@ public class Car {
 		if (combustivel <= 0) {
 			g.drawString("X", getX(), getY() + 10);
 			//
-			System.out.println("Necessário abastecer o veiculo");
+			//System.out.println("Necessário abastecer o veiculo");
 		}
+	}
+
+	public int getId() {
+		return this.id;
 	}
 }
